@@ -1,0 +1,8 @@
+{
+  "host": "localhost",
+  "port": 5433,
+  "user": "cams",
+  "password": "cams123",
+  "template": "template1",
+  "dbname": "cams"
+}
