@@ -1,7 +1,28 @@
+from psycopg2 import sql
+from func.conndb import dbcams
 
-### --------------------------------------------
-### FIRST CONECTION WITH DATABASE
-### --------------------------------------------
+"""
+    This python contains all functions for database connections 
+
+    :function:
+        def function_name(*args):
+            # ----- [FIRST ARGUMENTS] ----
+            conn = args[0]['conn']
+            curs = args[0]['cursor']
+            data = args[0]['data']
+            # ----- [YOUR CODE]
+             try:
+                # Function | ()
+                # Return | {}
+            except Exception as e:
+                print(e)
+                # Return | {}
+                
+    :parameter: args <[]>
+    :return: response <{'error': True | False, 'msj': '', 'data': {'data': <object>}}>
+"""
+
+# Functions Enviroment Class
 @dbcams()
 def rev_conn_template(*args):
     # ----- [FIRST ARGUMENTS] ----
@@ -83,9 +104,7 @@ def create_schemas_cams(*args):
     except Exception as e:
         return {'error': False, 'msj': 'Dont create schemas for cam - {}'.format(e), 'data': {}}
 
-### --------------------------------------------
-### DB CONEWCTIONS
-### --------------------------------------------
+# Functions Code Class
 @dbcams()
 def insert_device(*args):
     # ----- [FIRST ARGUMENTS] ----
