@@ -53,7 +53,10 @@ class dbcams:
                         )
                         self.cursor = self.conn.cursor()
                         # Run principal function son node
-                        x = func(*args, {'conn': self.conn, 'cursor': self.cursor, 'data': data})
+                        try:
+                           x = func(*args, {'conn': self.conn, 'cursor': self.cursor, 'data': data, 'log': kwargs['log']})
+                        except Exception as e:
+                           x = func(*args, {'conn': self.conn, 'cursor': self.cursor, 'data': data })
                         # Close connection and cursor
                         self.cursor.close()
                         self.conn.close()

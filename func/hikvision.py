@@ -1,15 +1,14 @@
 from hikvisionapi import Client, AsyncClient
 import pytesseract
 from PIL import Image, ImageEnhance,ImageOps
-import dbactions as db
+from func.returns import returns
+import func.dbactions as db
 import time
 import os
 import datetime
 import glob
 import json
 import xmltodict
-# import time
-# time.clock = time.time
 
 
 class Hickvision:
@@ -34,6 +33,12 @@ class Hickvision:
 
     def __init__(self):
         self.parent_dir = '{}/static/'.format(os.getcwd())
+
+
+    @returns()
+    def init_check_database(self):
+        response = db.rev_conn_template(data={}, option=1)
+        return response
 
     def init_enviroment(self):
         func = db.rev_conn_template(data={}, option=1)
@@ -444,7 +449,8 @@ class Hickvision:
             return str(s.replace('\'', ''))
 
 
-nvr = Hickvision()
+
+
 
 #CREACIÓN DE AMBIENTES
 # response = nvr.init_enviroment()

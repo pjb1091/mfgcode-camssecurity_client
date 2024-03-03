@@ -1,10 +1,96 @@
-from flask import Flask
+import os
+
+from flask import Flask, redirect, url_for, request
 from func.hikvision import Hickvision
+from func.licence import Licence
 import json
 
 app = Flask(__name__)
 
-@app.route('/nvr/database/create')
+#####################################################  [ CHECK ]
+@app.route('/apiv.1/check', methods=["POST","GET"])
+def check():
+    return (""""
+        ================================================================================ 
+         
+        🅰🅶🅴🅽🆃-🅲🅰🅼
+        
+        ================================================================================ 
+
+        Menu for check:
+        
+        1.- ping : Review start app
+                security: NO
+                endpoint: /apiv.1/check/ping
+                
+        2.- files : Review important files
+                security: NO
+                endpoint: /apiv.1/check/files
+    """)
+@app.route('/apiv.1/check/ping', methods=["POST","GET"])
+def ping():
+    """
+    Check function from response client
+    :return: {}
+    """
+    if request.method == 'POST':
+        return {'error':False, "msj": "Test request app - Agent [METHOD:POST] - OK!!"}
+    elif request.method == 'GET':
+        return {'error': False, "msj": "Test request app - Agent [METHOD:GET] - OK!!"}
+
+@app.route('/apiv.1/check/files', methods=["POST","GET"])
+def files_check():
+    """
+    Check inportant files for opertion
+    :return: {}
+    """
+    if os.path.isfile('conf/database.json') and os.path.isfile('conf/access.json'):
+        return {'error': False, "msj": "Test request app - Agent [METHOD:GET] - OK!!"}
+    else:
+        return ({'error': True, "msj": "FAIL open impotant files"}, 500)
+
+
+#####################################################  [ NVR ]
+
+@app.route('/apiv.1/nvr', methods=["POST", "GET"])
+def nvr():
+    return (""""
+        ================================================================================ 
+
+        🅰🅶🅴🅽🆃-🅲🅰🅼
+
+        ================================================================================ 
+
+        Menu for nvr:
+
+        1.- accessdb : Check database connection from json params
+                security: NO
+                endpoint: /apiv.1/nvr/accessdb
+
+        2.- accessplataform : Check licence and status record company from main sysmtem Cam-Security
+                security: NO
+                endpoint: /apiv.1/nvr/accessplataform
+        
+        3.- hikvision: Api conection HikVision (Integrated)
+                security: SI
+                endpoint: /apiv.1/nvr/hikvision
+    """)
+
+@app.route('/apiv.1/nvr/accessdb', methods=["POST", "GET"])
+def accesdb():
+    nvr = Hickvision()
+    response = nvr.init_check_database()
+    return response
+
+
+@app.route('/apiv.1/nvr/accessplataform', methods=["POST", "GET"])
+def accessplataform():
+    licence = Licence()
+    response = licence.init_check_licence()
+    return response
+
+
+@app.route('/api/nvr/database/create')
 def create_nvr():
     nvr = Hickvision()
     response = nvr.init_enviroment()

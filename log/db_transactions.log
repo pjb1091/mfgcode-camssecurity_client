@@ -1,0 +1,4 @@
+2024-03-03 08:43:24,318 | INFO | test01    2806:2f0:a160:f465:884e:4112:3e4f:86e0 : rev_conn_template : __CALLBACK
+2024-03-03 08:43:24,814 | INFO | test01    2806:2f0:a160:f465:884e:4112:3e4f:86e0 : rev_conn_template : Great !! Conection to template1 db is OK
+2024-03-03 08:52:57,967 | INFO | test01    2806:2f0:a160:f465:884e:4112:3e4f:86e0 : rev_conn_template : __CALLBACK
+2024-03-03 08:52:58,504 | INFO | test01    2806:2f0:a160:f465:884e:4112:3e4f:86e0 : rev_conn_template : Great !! Conection to template1 db is OK

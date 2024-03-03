@@ -1,6 +1,6 @@
 from psycopg2 import sql
 from func.conndb import dbcams
-
+from func.logger import logger
 """
     This python contains all functions for database connections 
 
@@ -23,12 +23,15 @@ from func.conndb import dbcams
 """
 
 # Functions Enviroment Class
+@logger(file='db_transactions', named='rev_conn_template')
 @dbcams()
 def rev_conn_template(*args):
     # ----- [FIRST ARGUMENTS] ----
     conn = args[0]['conn']
     curs = args[0]['cursor']
     data = args[0]['data']
+    # ----- [FIRST ADDED FOR LOG]
+    log = args[0]['log']
     # ----- [YOUR CODE]
     try:
         curs.execute("SELECT now();")
